@@ -62,8 +62,11 @@ function initCal(){
  for ( i=0; i < timeBlock.length ; i++ ){
    console.log(timeBlock[i]);
    //FORMAT EACH ROW ON ITS OWN
-   var blockRow = $('<tr><td>'+timeBlock[i]+'</td></tr>');
+   var blockHeader = $('<td>'+ timeBlock[i]+ '</td>');
+   var blockContent = $('<td>'+'something'+'</td>');
+   var blockRow = $('<tr>')
    blockRow.addClass("time-block row");
+   blockRow.append(blockHeader,blockContent);
    //MAKE STYLE FOR TIME   $("h1, h2, p").addClass("blue");
    //SET INDEX FOR EACH NOW ROW MADE   $("#w3s").attr("href", "https://www.w3schools.com/jquery/");
    $('#timeline').append(blockRow);
