@@ -37,6 +37,7 @@
     <script type="text/javascript">
     
     //PLAN OF ATTACK
+    initCal();
 
 //FUNCTION - GET DATE
 function getDate(){
@@ -65,16 +66,16 @@ function initCal(){
    var blockRow = $('<tr>')
    //ADJUST OUT OF WORK HOUR ROWS"
    if ( timeBlock[i]< 8 || timeBlock[i] > 18){
-   blockRow.addClass("row past hour");
+   blockRow.addClass("hour row past");
    } else {
-   blockRow.addClass("row hour");
+   blockRow.addClass("hour row");
    }
 
    //FORMAT EACH ROW ON ITS OWN
    var blockHeader = $('<td>'+ timeBlock[i]+ '</td>');
    blockHeader.addClass("time-block")
    var blockContent = $('<td><textarea>'+'something'+'</textarea></td>');
-   blockContent.addClass("description")
+   blockContent.addClass("time-block description")
    var blockButton=$('<button>');
    blockButton.attr("data-id"+i)
    blockButton.addClass("saveBtn");

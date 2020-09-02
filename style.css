@@ -37,15 +37,6 @@ textarea{
   border-top: 1px solid white;;
 }
 
-.nonwork {
-  white-space: pre-wrap;
-  height: 40px;
-  background-color:blueviolet;
-  border-top: 1px solid white;;
-}
-
-
-
 .hour {
   background-color: #ffffff;
   color: #000000;
@@ -54,7 +45,6 @@ textarea{
 
 .past {
   background-color: #d3d3d3;
-  height: 40px;
   color: white;
 }
 
