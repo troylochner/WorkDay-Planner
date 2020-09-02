@@ -28,7 +28,7 @@
       <p class="lead">A simple calendar app for scheduling your work day</p>
       <p id="currentDay" class="lead"></p>
     </header>
-    <div class="container">
+    <div id="timeline" class="container">
       <!-- Timeblocks go here -->
     </div>
 
@@ -57,12 +57,18 @@ function initCal(){
  theDate = getDate() ; 
  $("#currentDay").append(theDate);
  console.log("initCal -> theDate", theDate);
- for (i=0; i < timeBlock.length, i++) {
-
-   
- }
-
  
+
+ for ( i=0; i < timeBlock.length ; i++ ){
+   console.log(timeBlock[i]);
+   //FORMAT EACH ROW ON ITS OWN
+   var blockRow = $('<tr><td>'+timeBlock[i]+'</td></tr>');
+   blockRow.addClass("time-block row");
+   //MAKE STYLE FOR TIME   $("h1, h2, p").addClass("blue");
+   //SET INDEX FOR EACH NOW ROW MADE   $("#w3s").attr("href", "https://www.w3schools.com/jquery/");
+   $('#timeline').append(blockRow);
+ };
+
 
 }
  
