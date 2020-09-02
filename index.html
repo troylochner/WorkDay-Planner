@@ -61,12 +61,30 @@ function initCal(){
 
  for ( i=0; i < timeBlock.length ; i++ ){
    console.log(timeBlock[i]);
+
+   var blockRow = $('<tr>')
+   //ADJUST OUT OF WORK HOUR ROWS"
+   if ( timeBlock[i]< 8 || timeBlock[i] > 18){
+   blockRow.addClass("row past hour");
+   } else {
+   blockRow.addClass("row hour");
+   }
+
    //FORMAT EACH ROW ON ITS OWN
    var blockHeader = $('<td>'+ timeBlock[i]+ '</td>');
-   var blockContent = $('<td>'+'something'+'</td>');
-   var blockRow = $('<tr>')
-   blockRow.addClass("time-block row");
-   blockRow.append(blockHeader,blockContent);
+   blockHeader.addClass("time-block")
+   var blockContent = $('<td><textarea>'+'something'+'</textarea></td>');
+   blockContent.addClass("description")
+   var blockButton=$('<button>');
+   blockButton.attr("data-id"+i)
+   blockButton.addClass("saveBtn");
+   
+   //<input type="text" id="myText" value="Some text...">
+   
+   
+
+
+   blockRow.append(blockHeader,blockContent,blockButton);
    //MAKE STYLE FOR TIME   $("h1, h2, p").addClass("blue");
    //SET INDEX FOR EACH NOW ROW MADE   $("#w3s").attr("href", "https://www.w3schools.com/jquery/");
    $('#timeline').append(blockRow);
