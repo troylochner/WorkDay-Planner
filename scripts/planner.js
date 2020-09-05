@@ -1,6 +1,6 @@
 //PLAN OF ATTACK
 var rightNow;
-var calendarStorage = JSON.parse(localStorage.getItem('calendarStorage'));
+var savedEvents = JSON.parse(localStorage.getItem('savedEvents'));
 initCal();
 
 //GET THE CURRENT MOMENT - MAKE LOOK PRETTY
@@ -58,8 +58,11 @@ $(".saveBtn").on("click", function () {
     console.log("eventTitle", eventTitle)
     eventID = $(this).siblings(".description").attr("id");
     console.log("eventID", eventID)
-    var eventObject = { 'eventID' : eventID, 'Title' : eventTitle }
-    localStorage.setItem("storedEvents["+eventID+']', JSON.stringify(eventObject));
+    newEvent = { 'eventID' : eventID, 'Title' : eventTitle };
+    newEvent = JSON.stringify(newEvent);
+
+    //var eventObject = { 'eventID' : eventID, 'Title' : eventTitle }
+    localStorage.setItem("storedEvents["+eventID+']', newEvent );
 
 })
 
