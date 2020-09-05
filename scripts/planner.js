@@ -1,57 +1,48 @@
-   
 //PLAN OF ATTACK
+var rightNow ; 
 initCal();
 
-//FUNCTION - GET DATE
+//GET THE CURRENT MOMENT - MAKE LOOK PRETTY
 function getDate(){
-var fullDate = new Date()
-var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)? (fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
-var currentDate = twoDigitMonth + "/" + fullDate.getDate() + "/" + fullDate.getFullYear();
-return currentDate;
+    var rightNow = moment().format('LLL')
+    return rightNow;
 }
 
-function makeDailyTimes(){
-var timeBlock =['00.00','01.00','02.00','03.00','04.00','05.00','06.00','07.00','08.00','09.00','10.00','11.00','12.00','13.00','14.00','15.00','16.00','17.00','18.00','19.00','20.00','21.00','22.00','23.00'];
-return timeBlock
-}
 
+//INITIALIZE THE CALENDAR
 function initCal(){
-timeBlock = makeDailyTimes() ;
-console.log("initCal -> timeBlock", timeBlock)
 theDate = getDate() ; 
 $("#currentDay").append(theDate);
-console.log("initCal -> theDate", theDate);
 
+//FOR EACH HOUR IN THE DAY - MAKE A ROW
+for ( i=0; i < 24 ; i++ ){
+var displayTime = moment().hour(i).minute(0).second(0) //THIS CAN ACT AS A GOOD UUID-TYPE INDEX - THIS IS OUR EPOCH DATE
 
-for ( i=0; i < timeBlock.length ; i++ ){
-console.log(timeBlock[i]);
+//console.log(moment(calTime).utc());
 
+//MAKE TABLE ROW ELEMENT
 var blockRow = $('<tr>')
-//ADJUST OUT OF WORK HOUR ROWS"
-if ( timeBlock[i]< 8 || timeBlock[i] > 18){
-blockRow.addClass("hour row past");
-} else {
-blockRow.addClass("hour row");
-}
+blockRow.attr("data-id",displayTime);
 
-//FORMAT EACH ROW ON ITS OWN
-var blockHeader = $('<td>'+ timeBlock[i]+ '</td>');
-blockHeader.addClass("time-block")
+//MAKE THE TABLE DATA ELEMENT - DISPLAY TIME OF DAY
+var blockTime = $('<td>'+ moment(displayTime).format('LT') + '</td>');
+//blockHeader.addClass("time-block")
+
+//MAKE TABLE DATA - DISPLAY WHAT IS HAPPENING AT THAT TIME
 var blockContent = $('<td><textarea>'+'something'+'</textarea></td>');
-blockContent.addClass("time-block description")
+//blockContent.addClass("time-block description")
+
+//MAKE BUTTON FOR THE ROW
 var blockButton=$('<button>');
-blockButton.attr("data-id"+i)
-blockButton.addClass("saveBtn");
+//blockButton.attr("data-id"+i)
+//blockButton.addClass("saveBtn");
 
-//<input type="text" id="myText" value="Some text...">
-
-
-
-
-blockRow.append(blockHeader,blockContent,blockButton);
+//PUT IT ALL TOGETHER
+blockRow.append(blockTime,blockContent,blockButton);
 //MAKE STYLE FOR TIME   $("h1, h2, p").addClass("blue");
 //SET INDEX FOR EACH NOW ROW MADE   $("#w3s").attr("href", "https://www.w3schools.com/jquery/");
 $('#timeline').append(blockRow);
+
 };}
 
 
