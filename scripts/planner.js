@@ -1,11 +1,7 @@
 //PLAN OF ATTACK
 var rightNow;
 var calendarStorage = JSON.parse(localStorage.getItem('calendarStorage'));
-var eventTimeID ;
-var eventInfo ; 
 initCal();
-
-
 
 //GET THE CURRENT MOMENT - MAKE LOOK PRETTY
 function getDate() {
@@ -56,20 +52,22 @@ function initCal() {
     };
 }
 
-
-//SAVE DATA //
-$('.saveBtn').on("click", function (e) {
-    eventTimeID = this.getAttribute("data-id");
-    //var eventTimeID = this.getAttribute("data-id");
-    var findEventTimeID = "#" + eventTimeID;
-    eventInfo = $(findEventTimeID).val()
-    //var eventInfo = $(findEventTimeID).val()
-    console.log("Event Time ID :", eventTimeID);
-    console.log("Event Info :", $(findEventTimeID).val())
+//SAVE DATA
+$(".saveBtn").on("click", function () {
+    eventTitle = $(this).siblings(".description").val().trim();
+    console.log("eventTitle", eventTitle)
+    eventID = $(this).siblings(".description").attr("id");
+    console.log("eventID", eventID)
+    var eventObject = { 'eventID' : eventID, 'Title' : eventTitle }
+    localStorage.setItem("storedEvents["+eventID+']', JSON.stringify(eventObject));
 
 })
 
-function setStorage(eventTimeID, eventInfo) {
-    storage[eventTimeID] = eventInfo;
-    localStorage.setItem('storage', JSON.stringify(storage));
-}
+$("#clearAll").on("click", function () {
+    localStorage.clear();
+    //initCal();
+})
+
+
+$(document).ready(function(){
+});
