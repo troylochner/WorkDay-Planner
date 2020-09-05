@@ -17,12 +17,22 @@ $("#currentDay").append(theDate);
 //FOR EACH HOUR IN THE DAY - MAKE A ROW
 for ( i=0; i < 24 ; i++ ){
 var displayTime = moment().hour(i).minute(0).second(0) //THIS CAN ACT AS A GOOD UUID-TYPE INDEX - THIS IS OUR EPOCH DATE
+var nextTime = moment().hour(i+1).minute(0).second(0)
 
 //console.log(moment(calTime).utc());
 
 //MAKE TABLE ROW ELEMENT
 var blockRow = $('<tr>')
 blockRow.attr("data-id",displayTime);
+
+//CONDITIONAL IF THE TIME IS IN THE PAST / PRESENT / FUTURE
+if (moment().isBetween(displayTime,nextTime)===true){
+    blockRow.addClass("present")
+} else if (moment().isBefore(displayTime)){
+    blockRow.addClass ("past")
+} else {
+    blockRow.addClass("future")
+}
 
 //MAKE THE TABLE DATA ELEMENT - DISPLAY TIME OF DAY
 var blockTime = $('<td>'+ moment(displayTime).format('LT') + '</td>');
