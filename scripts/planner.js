@@ -1,6 +1,6 @@
 //PLAN OF ATTACK
 var rightNow;
-var savedEvents = JSON.parse(localStorage.getItem('savedEvents'));
+//var savedEvents = JSON.parse(localStorage.getItem('savedEvents'));
 initCal();
 
 //GET THE CURRENT MOMENT - MAKE LOOK PRETTY
@@ -42,6 +42,16 @@ function initCal() {
             blockContent.addClass("past")
         }
 
+        //SEE IF WE HAVE AN ITEM SAVED FOR THIS TIME
+        var foundEvent = findEvent(i);
+        
+        if (foundEvent !== null){
+           //console.log("initCal -> foundEvent", foundEvent.Title)
+           var title = foundEvent.Title
+           console.log("initCal -> title", title)
+           blockContent.val(title);
+        } 
+
         //MAKE BUTTON FOR THE ROW
         var saveButton = $("<button>").addClass("col-md-2 saveBtn").attr("data-id",i).text("Save");
 
@@ -52,6 +62,13 @@ function initCal() {
     };
 }
 
+function findEvent(id) {
+    x = JSON.parse(localStorage.getItem("storedEvents["+ id + "]"));
+    //console.log(x);
+    return x;
+ }
+
+
 //SAVE DATA
 $(".saveBtn").on("click", function () {
     eventTitle = $(this).siblings(".description").val().trim();
@@ -61,8 +78,19 @@ $(".saveBtn").on("click", function () {
     newEvent = { 'eventID' : eventID, 'Title' : eventTitle };
     newEvent = JSON.stringify(newEvent);
 
+    localStorage.setItem("test",newEvent);
+    localStorage.setItem("storedEvents[" +eventID+']', newEvent );
+
+    var ds_items = JSON.parse(localStorage.getItem("test"));
+    console.log("ds_items", ds_items);
+
+    //x = JSON.parse(localStorage.getItem("storedEvents[2]"))
+
+
+
+
     //var eventObject = { 'eventID' : eventID, 'Title' : eventTitle }
-    localStorage.setItem("storedEvents["+eventID+']', newEvent );
+    
 
 })
 
