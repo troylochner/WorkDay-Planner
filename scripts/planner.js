@@ -12,6 +12,8 @@ function getDate() {
 //INITIALIZE THE CALENDAR
 function initCal() {
     theDate = getDate();
+    $("#currentDay").empty();
+    $('#calendar').empty();
     $("#currentDay").append(theDate);
 
     //FOR EACH HOUR IN THE DAY - MAKE A ROW
@@ -77,26 +79,15 @@ $(".saveBtn").on("click", function () {
     console.log("eventID", eventID)
     newEvent = { 'eventID' : eventID, 'Title' : eventTitle };
     newEvent = JSON.stringify(newEvent);
-
-    localStorage.setItem("test",newEvent);
     localStorage.setItem("storedEvents[" +eventID+']', newEvent );
 
     var ds_items = JSON.parse(localStorage.getItem("test"));
     console.log("ds_items", ds_items);
-
-    //x = JSON.parse(localStorage.getItem("storedEvents[2]"))
-
-
-
-
-    //var eventObject = { 'eventID' : eventID, 'Title' : eventTitle }
-    
-
 })
 
 $("#clearAll").on("click", function () {
     localStorage.clear();
-    //initCal();
+    initCal();
 })
 
 
