@@ -71,9 +71,17 @@ $(".saveBtn").on("click", function () {
     newEvent = JSON.stringify(newEvent);
     localStorage.setItem("storedEvents[" +eventID+']', newEvent );
 })
-
+//HOVER FUNCTION
+$(".saveBtn").hover(function(){
+    $(this).addClass("saveBtnHover");
+    }, function(){
+    $(this).removeClass("saveBtnHover");
+  });
+  
+  
 $("#clearAll").on("click", function () {
     localStorage.clear();
     initCal();
 })
 });
+
